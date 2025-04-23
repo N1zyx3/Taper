@@ -25,3 +25,5 @@ Thumbs.db
 
 # Game specific saves
 assets/player_data.dat 
+
+.editorconfig
