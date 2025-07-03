@@ -1,6 +1,6 @@
 # Taper
 
-A simple clicker game developed in Python using the Pygame library.
+A simple clicker game with themes.
 
 ## Installation and Setup
 
