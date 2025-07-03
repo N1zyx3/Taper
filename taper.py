@@ -6,7 +6,6 @@ import hashlib
 
 py.init()
 
-# Константы для проверки кликов
 TARGET_RECT = py.Rect(72, 210, 256, 256)
 SHOP_BUTTON_RECT = py.Rect(110, 520, 182, 67)
 DEFAULT_THEME_RECT = py.Rect(28, 168, 96, 96)
@@ -14,11 +13,9 @@ BS_THEME_RECT = py.Rect(152, 168, 96, 96)
 MINE_THEME_RECT = py.Rect(276, 168, 96, 96)
 CLOSE_SHOP_RECT = py.Rect(362, 118, 24, 24)
 
-# Используем один бинарный файл для хранения данных пользователя
 SAVE_FILE = 'assets/player_data.dat'
-SALT = b'taper_game_salt'  # Соль для хэширования
+SALT = b'taper_game_salt'
 
-# Сначала настраиваем экран (это исправляет ошибку)
 screen = py.display.set_mode((400, 600))
 py.display.set_caption('Taper')
 
@@ -29,41 +26,32 @@ font_10 = py.font.Font('assets/fonts/default/OpenSans-SemiBold.ttf', 10)
 bs_buy = font_22.render('10000', True, 'Black')
 mine_buy = font_10.render('9999999999999', True, 'Black')
 
-# Функции для шифрования и дешифрования данных
 def encrypt_data(data):
-    # Преобразуем данные в JSON строку
     json_data = json.dumps(data)
-    # Шифруем данные с помощью base64
     encrypted = base64.b64encode(json_data.encode('utf-8')).decode('utf-8')
-    # Добавляем контрольную сумму
     checksum = hashlib.sha256(SALT + json_data.encode('utf-8')).hexdigest()[:16]
     return encrypted + "." + checksum
 
 def decrypt_data(encrypted_data):
     try:
-        # Разделяем данные и контрольную сумму
         parts = encrypted_data.split(".")
         if len(parts) != 2:
             return get_default_data()
         
         encrypted, checksum = parts
         
-        # Расшифровываем данные
         json_data = base64.b64decode(encrypted.encode('utf-8')).decode('utf-8')
         
-        # Проверяем контрольную сумму
         expected_checksum = hashlib.sha256(SALT + json_data.encode('utf-8')).hexdigest()[:16]
         if checksum != expected_checksum:
             print("Предупреждение: файл сохранения был изменен. Сброс данных.")
             return get_default_data()
         
-        # Преобразуем JSON строку обратно в словарь
         return json.loads(json_data)
     except Exception as e:
         print(f"Ошибка при чтении данных: {e}")
         return get_default_data()
 
-# Функция для получения данных по умолчанию
 def get_default_data():
     return {
         "money": 0,
@@ -74,7 +62,6 @@ def get_default_data():
         }
     }
 
-# Функции для работы с данными
 def load_player_data():
     if not os.path.exists(SAVE_FILE):
         data = get_default_data()
@@ -87,7 +74,6 @@ def load_player_data():
 
 def save_player_data(data):
     encrypted_data = encrypt_data(data)
-    # Создаем директорию, если она не существует
     os.makedirs(os.path.dirname(SAVE_FILE), exist_ok=True)
     with open(SAVE_FILE, 'w') as file:
         file.write(encrypted_data)

@@ -24,4 +24,6 @@ ENV/
 Thumbs.db
 
 # Game specific saves
-assets/player_data.dat 
+assets/player_data.dat
+.editorconfig
+Taper.spec
