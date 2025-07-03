@@ -24,6 +24,12 @@ ENV/
 Thumbs.db
 
 # Game specific saves
+<<<<<<< HEAD
 assets/player_data.dat
 .editorconfig
 Taper.spec
+=======
+assets/player_data.dat 
+
+.editorconfig
+>>>>>>> 15700dcc2c81a658006fe69b6898cb87760b84c6

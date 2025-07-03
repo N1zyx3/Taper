@@ -1,6 +1,10 @@
 # Taper
 
+<<<<<<< HEAD
 A simple clicker game with themes on Python.
+=======
+A simple clicker game with themes.
+>>>>>>> 15700dcc2c81a658006fe69b6898cb87760b84c6
 
 ## Installation and Setup
 
@@ -17,4 +21,8 @@ A simple clicker game with themes on Python.
 ## Requirements
 
 - Python 3.6 or higher
+<<<<<<< HEAD
 - Pygame 2.0.0 or higher 
+=======
+- Pygame 2.0.0 or higher 
+>>>>>>> 15700dcc2c81a658006fe69b6898cb87760b84c6

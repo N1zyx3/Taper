@@ -34,6 +34,7 @@ def encrypt_data(data):
 
 def decrypt_data(encrypted_data):
     try:
+        # Разделяем данные и контрольную сумму
         parts = encrypted_data.split(".")
         if len(parts) != 2:
             return get_default_data()
